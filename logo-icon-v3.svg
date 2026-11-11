@@ -1,0 +1,19 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- World Industry Heart - Icon Mark v3 (serrated geometric frame) -->
+
+  <!-- Outer frame - jagged / serrated hexagon (segmented line, sharper geometric feel) -->
+  <polygon points="200,20 245.5,31.2 274.7,70.6 323.4,76.2 355.9,110 368.9,155 349.4,200 368.9,245 355.9,290 323.4,323.8 274.7,329.4 245.5,368.8 200,380 154.5,368.8 125.3,329.4 76.6,323.8 44.1,290 31.1,245 50.6,200 31.1,155 44.1,110 76.6,76.2 125.3,70.6 154.5,31.2"
+           fill="#0A1F3D" stroke="#C9A227" stroke-width="5" stroke-linejoin="miter"/>
+
+  <!-- Inner smooth hexagon ring for contrast/framing -->
+  <polygon points="200,55 322,125 322,275 200,345 78,275 78,125"
+           fill="none" stroke="#C9A227" stroke-width="1.5" opacity="0.8"/>
+
+  <!-- Large geometric lightning bolt - sharp, angular -->
+  <polygon points="209,110 119,218 200,218 191,290 281,182 200,182"
+           fill="#D4AF37" stroke="#0A1F3D" stroke-width="2.5" stroke-linejoin="miter"/>
+
+  <!-- Inner faceted accent (dark petrol) - beveled, metallic, "cut" industrial look -->
+  <polygon points="205,150 155,210 200,210 195,249.5 244.5,190 200,190"
+           fill="#06283D"/>
+</svg>

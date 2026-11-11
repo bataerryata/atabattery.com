@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرایط گارانتی |  آتا باتری</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/warranty-conditions.css">
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <div class="page-content">
+        <div class="warranty-container">
+            <div class="page-header">
+                <h1>شرایط <span>گارانتی</span> محصولات</h1>
+                <p>آسودگی خاطر شما با ۱۵ ماه گارانتی بی‌قید و شرط محصولات آتا</p>
+            </div>
+
+            <div class="conditions-card">
+                <h3><i class="fas fa-file-contract"></i> شرایط استفاده از گارانتی</h3>
+                <ul class="conditions-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>مدت زمان گارانتی</strong>
+                            <span>تمامی باتری‌های خودرویی و UPS تولیدی شرکت آـا دارای ۱۵ ماه گارانتی تعویض بی‌قید و شرط از تاریخ خرید می‌باشند.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>نصب توسط نمایندگی مجاز</strong>
+                            <span>برای فعال‌سازی گارانتی، نصب باتری حتماً باید توسط یکی از نمایندگی‌های مجاز آتا انجام و کارت گارانتی مهر و امضا شود.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-times-circle" style="color: #e74c3c;"></i>
+                        <div>
+                            <strong>موارد ابطال گارانتی</strong>
+                            <span>آسیب فیزیکی به بدنه، دستکاری در برچسب‌ها، استفاده از شارژرهای غیراستاندارد و نصب در خودروهای سنگین‌تر از ظرفیت باتری.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../assets/js/include.js"></script>
+    <script>
+        function highlightActiveNav() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-menu > .nav-item > a.nav-link').forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop().split('?')[0];
+                if (linkPath === currentPath) link.classList.add('active');
+            });
+            document.querySelectorAll('.nav-menu > .nav-item > span.nav-link').forEach(span => {
+                span.classList.remove('active');
+                const dropdown = span.nextElementSibling;
+                if (dropdown) {
+                    dropdown.querySelectorAll('a').forEach(a => {
+                        const linkPath = a.getAttribute('href').split('/').pop().split('?')[0];
+                        if (linkPath && linkPath === currentPath) span.classList.add('active');
+                    });
+                }
+            });
+        }
+        document.addEventListener('partLoaded', function (e) {
+            if (e.detail.id === 'navbar-placeholder') highlightActiveNav();
+        });
+    </script>
+</body>
+</html>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Vazirmatn', sans-serif; background: var(--white); color: var(--navy-dark); line-height: 1.8; }
+
+.warranty-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+.page-content { margin-top: 82px; padding: 50px 0; min-height: 80vh; }
+.page-header { text-align: center; margin-bottom: 50px; }
+.page-header h1 { font-size: 36px; font-weight: 900; color: var(--navy-dark); margin-bottom: 12px; }
+.page-header h1 span { color: var(--gold-primary); }
+.page-header p { color: #666; font-size: 16px; }
+
+.conditions-card { background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); border-top: 4px solid var(--gold-primary); }
+.conditions-card h3 { font-size: 22px; margin-bottom: 25px; color: var(--navy-dark); display: flex; align-items: center; gap: 10px; }
+.conditions-list { list-style: none; }
+.conditions-list li { padding: 16px 0; border-bottom: 1px solid #eee; display: flex; gap: 12px; align-items: flex-start; }
+.conditions-list li:last-child { border-bottom: none; }
+.conditions-list li i { color: var(--gold-primary); font-size: 20px; margin-top: 3px; }
+.conditions-list li strong { display: block; color: var(--navy-dark); margin-bottom: 4px; font-size: 16px; }
+.conditions-list li span { color: #666; font-size: 14px; }
+
+@media (max-width: 768px) {
+    .page-content { margin-top: 64px; }
+    .page-header h1 { font-size: 28px; }
+    .conditions-card { padding: 20px; }
+}
+/* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+</style>

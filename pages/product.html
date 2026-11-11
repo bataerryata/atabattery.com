@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محصولات | ATA Battery</title>
+
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+
+    <style>
+        :root {
+            --gray-light2: #F8F9FA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--gray-light2);
+            color: var(--navy-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ================= PAGE HERO ================= */
+        .page-content { margin-top: 82px; }
+        .page-header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+            padding: 100px 0 120px; text-align: center; position: relative; overflow: hidden;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%);
+            border-radius: 50%; animation: pulse 8s infinite alternate;
+        }
+        .page-header::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 80px;
+            background: var(--gray-light2); clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+        .page-header h1 {
+            color: var(--white); font-size: 52px; font-weight: 900; margin-bottom: 20px;
+            position: relative; z-index: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .page-header h1 span { color: var(--gold-primary); }
+        .page-header p {
+            color: rgba(255,255,255,0.85); font-size: 18px; max-width: 650px; margin: 0 auto;
+            position: relative; z-index: 1; line-height: 1.8;
+        }
+
+        /* ================= FILTER TABS ================= */
+        .products-section { padding: 40px 0 100px; }
+        .filter-tabs {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 60px; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 12px 30px; background: var(--white); border: 2px solid transparent;
+            color: var(--navy-dark); border-radius: 50px; cursor: pointer; font-weight: 700;
+            transition: var(--transition); font-family: 'Vazirmatn', sans-serif; font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden;
+        }
+        .filter-btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+            opacity: 0; transition: var(--transition); z-index: 0;
+        }
+        .filter-btn span { position: relative; z-index: 1; }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--gold-primary); color: var(--navy-dark); transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(201,162,39,0.3);
+        }
+        .filter-btn:hover::before, .filter-btn.active::before { opacity: 1; }
+
+        /* ================= PRODUCT GRID & CARDS ================= */
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px; max-width: 1400px; margin: 0 auto; padding: 0 30px;
+        }
+
+        .product-card {
+            background: var(--white); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05); position: relative;
+            display: flex; flex-direction: column;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(10,31,61,0.15);
+            border-color: var(--gold-primary);
+        }
+
+        .product-image-wrapper {
+            position: relative; height: 260px; overflow: hidden;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        }
+        .product-image {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .product-card:hover .product-image { transform: scale(1.1); }
+
+        .product-image-wrapper::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg); transition: 0.7s; pointer-events: none;
+        }
+        .product-card:hover .product-image-wrapper::after { left: 150%; }
+
+        .product-badge {
+            position: absolute; top: 15px; right: 15px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+            color: var(--navy-dark); padding: 6px 16px; border-radius: 20px;
+            font-weight: 800; font-size: 12px; box-shadow: 0 4px 15px rgba(201,162,39,0.4);
+            z-index: 2;
+        }
+
+        .product-warranty {
+            position: absolute; bottom: 15px; left: 15px;
+            background: rgba(10,31,61,0.9); backdrop-filter: blur(5px);
+            color: var(--gold-primary); padding: 8px 14px; border-radius: 10px;
+            font-weight: 700; font-size: 12px; border: 1px solid var(--gold-primary);
+            display: flex; align-items: center; gap: 6px; z-index: 2;
+        }
+
+        .product-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .product-info h3 {
+            color: var(--navy-dark); font-size: 20px; margin-bottom: 10px; font-weight: 800;
+            transition: var(--transition);
+        }
+        .product-card:hover .product-info h3 { color: var(--gold-primary); }
+        .product-info p { color: #666; margin-bottom: 20px; line-height: 1.7; font-size: 14px; flex: 1; }
+
+        .product-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .spec-tag {
+            background: var(--gray-light2); color: var(--navy-dark); padding: 6px 12px;
+            border-radius: 6px; font-size: 12px; font-weight: 700; border: 1px solid #e0e0e0;
+            transition: var(--transition);
+        }
+        .product-card:hover .spec-tag { background: var(--petroleum-dark); color: var(--gold-primary); border-color: var(--petroleum-dark); }
+
+        .product-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 20px; border-top: 1px solid #eee;
+        }
+        .product-price { font-size: 18px; font-weight: 900; color: var(--navy-dark); }
+        .product-price span { font-size: 12px; font-weight: 600; color: #888; display: block; }
+
+        .view-details {
+            color: var(--navy-dark); font-weight: 700; font-size: 14px;
+            display: inline-flex; align-items: center; gap: 8px; transition: var(--transition);
+            text-decoration: none; background: var(--gray-light2); padding: 8px 16px; border-radius: 8px;
+        }
+        .product-card:hover .view-details { background: var(--gold-primary); color: var(--navy-dark); gap: 12px; }
+
+        .no-products {
+            grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #888;
+        }
+        .no-products i { font-size: 40px; color: var(--gold-primary); margin-bottom: 15px; display: block; }
+
+        /* ================= SCROLL REVEAL ANIMATION ================= */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 992px) {
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+            .page-header h1 { font-size: 36px; }
+        }
+        @media (max-width: 768px) {
+            .page-content { margin-top: 64px; }
+        }
+        /* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- navbar: از partials/navbar.html به‌صورت داینامیک لود می‌شه -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="page-header">
+            <h1 class="reveal" id="pageTitle">محصولات <span>آتا</span></h1>
+            <p class="reveal">مجموعه کامل باتری‌های خودرویی، UPS و صنعتی با بالاترین استانداردهای جهانی و 15 ماه گارانتی بی‌قید و شرط</p>
+        </div>
+
+        <div class="products-section">
+            <div class="filter-tabs reveal">
+                <button class="filter-btn active" onclick="filterProducts('all', this)"><span>همه محصولات</span></button>
+                <button class="filter-btn" onclick="filterProducts('car', this)"><span>باتری خودرو</span></button>
+                <button class="filter-btn" onclick="filterProducts('ups', this)"><span>باتری UPS</span></button>
+                <button class="filter-btn" onclick="filterProducts('motor', this)"><span>باتری موتور</span></button>
+                <button class="filter-btn" onclick="filterProducts('industrial', this)"><span>باتری صنعتی</span></button>
+            </div>
+
+            <!-- کارت‌ها اینجا به‌صورت داینامیک از assets/js/products-data.js ساخته می‌شن -->
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </div>
+
+    <!-- footer: از partials/footer.html به‌صورت داینامیک لود می‌شه -->
+    <div id="footer-placeholder"></div>
+
+    <!-- include.js شامل navbar-placeholder و footer-placeholder رو لود می‌کنه -->
+    <script src="../assets/js/include.js"></script>
+
+    <!-- دیتای محصولات: هر محصول جدید فقط اینجا اضافه می‌شه، هم این صفحه هم battery-detail.html ازش می‌خونن -->
+    <script src="../assets/js/products-data.js"></script>
+
+    <script>
+        // ==========================================================
+        // 1. ساخت HTML یک کارت از روی آبجکت محصول
+        // ==========================================================
+        function createProductCard(p) {
+            const badgeHtml = p.badge
+                ? `<span class="product-badge">${p.badge}</span>`
+                : '';
+            const warrantyText = p.warranty || '15 ماه گارانتی';
+            const specsHtml = p.specs.map(s => `<span class="spec-tag">${s}</span>`).join('');
+
+            const card = document.createElement('div');
+            card.className = 'product-card reveal';
+            card.dataset.category = p.category;
+            card.addEventListener('click', () => {
+                window.location.href = `battery-detail.html?id=${p.id}`;
+            });
+
+            card.innerHTML = `
+                <div class="product-image-wrapper">
+                    <img src="${p.image}" alt="${p.title}" class="product-image">
+                    ${badgeHtml}
+                    <div class="product-warranty"><i class="fas fa-shield-alt"></i> ${warrantyText}</div>
+                </div>
+                <div class="product-info">
+                    <h3>${p.title}</h3>
+                    <p>${p.desc}</p>
+                    <div class="product-specs">${specsHtml}</div>
+                    <div class="product-footer">
+                        <div class="product-price">استعلام قیمت<span></span></div>
+                        <span class="view-details">جزئیات <i class="fas fa-arrow-left"></i></span>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // ==========================================================
+        // 2. رندر کل لیست محصولات داخل گرید
+        // ==========================================================
+        function renderProducts(list) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            if (!list.length) {
+                grid.innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-box-open"></i>
+                        محصولی در این دسته‌بندی یافت نشد.
+                    </div>`;
+                return;
+            }
+
+            list.forEach(p => grid.appendChild(createProductCard(p)));
+            revealOnScroll();
+        }
+
+        // ==========================================================
+        // 3. فیلتر کردن بر اساس دسته‌بندی
+        // ==========================================================
+        function filterProducts(category, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const filtered = category === 'all'
+                ? PRODUCTS
+                : PRODUCTS.filter(p => p.category === category);
+
+            renderProducts(filtered);
+        }
+
+        // ==========================================================
+        // 4. خواندن پارامترهای cat و brand از URL (از منوی محصولات)
+        // ==========================================================
+        function applyUrlCategory() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('cat');
+            const brand = urlParams.get('brand');
+
+            const categoryMap = {
+                car: 'باتری خودرو',
+                ups: 'باتری UPS',
+                motor: 'باتری موتورسیکلت',
+                industrial: 'باتری صنعتی'
+            };
+            const brandMap = { ata: 'Ata', asa: 'Asa', zima: 'Zima' };
+
+            if (!category && !brand) {
+                document.getElementById('pageTitle').innerHTML = 'محصولات <span>ATA</span>';
+                renderProducts(PRODUCTS);
+                return;
+            }
+
+            // عنوان صفحه رو بر اساس دسته + برند می‌سازیم
+            const titleParts = [];
+            if (category) titleParts.push(categoryMap[category] || 'محصولات');
+            const brandLabel = brand ? (brandMap[brand] || brand) : 'ATA';
+            document.getElementById('pageTitle').innerHTML =
+                `${titleParts.join(' ') || 'محصولات'} <span>${brandLabel}</span>`;
+
+            // فیلتر واقعی روی دیتا: هم دسته هم برند (اگه توی URL بودن)
+            let filtered = PRODUCTS;
+            if (category) filtered = filtered.filter(p => p.category === category);
+            if (brand) filtered = filtered.filter(p => p.brand === brand);
+            renderProducts(filtered);
+
+            // اگه فقط cat توی URL بود (بدون brand)، تب مربوطه رو هم فعال کن
+            if (category && !brand) {
+                const targetBtn = document.querySelector(`.filter-btn[onclick*="'${category}'"]`);
+                if (targetBtn) {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    targetBtn.classList.add('active');
+                }
+            }
+        }
+
+        // ==========================================================
+        // 5. انیمیشن Scroll Reveal
+        // ==========================================================
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+            document.querySelectorAll('.reveal').forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 80) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ==========================================================
+        // 6. هایلایت کردن گزینه‌ی فعال منو بعد از لود navbar
+        // ==========================================================
+        function highlightActiveNav() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-menu > .nav-item > a.nav-link').forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop().split('?')[0];
+                if (linkPath === currentPath) link.classList.add('active');
+            });
+        }
+        document.addEventListener('partLoaded', function (e) {
+            if (e.detail.id === 'navbar-placeholder') highlightActiveNav();
+        });
+
+        // ==========================================================
+        // شروع کار
+        // ==========================================================
+        document.addEventListener('DOMContentLoaded', applyUrlCategory);
+    </script>
+</body>
+</html>

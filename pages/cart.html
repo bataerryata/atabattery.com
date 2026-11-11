@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سبد خرید | ATA Battery</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root { --navy-dark:#0A1F3D; --gold-primary:#C9A227; --gold-light:#D4AF37; --gray-light:#F5F5F5; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Vazirmatn', sans-serif; background:var(--gray-light); color:var(--navy-dark); padding:40px 20px; }
+.container { max-width: 900px; margin:0 auto; }
+h1 { margin-bottom: 30px; }
+.cart-item { display:flex; align-items:center; gap:20px; background:white; border-radius:12px; padding:20px; margin-bottom:15px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+.cart-item img { width:90px; height:90px; object-fit:contain; border-radius:8px; background:var(--gray-light); }
+.cart-item-info { flex:1; }
+.cart-item-info h3 { font-size:16px; margin-bottom:8px; }
+.qty-controls { display:flex; align-items:center; gap:10px; }
+.qty-controls button { width:30px;height:30px;border-radius:6px;border:1px solid var(--navy-dark);background:white;cursor:pointer; }
+.remove-btn { color:#c0392b; background:none; border:none; cursor:pointer; font-size:18px; }
+.cart-summary { background:white; border-radius:12px; padding:25px; margin-top:30px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+.total-row { display:flex; justify-content:space-between; font-size:20px; font-weight:900; margin-bottom:20px; }
+.checkout-btn { width:100%; padding:16px; background:linear-gradient(135deg,var(--gold-primary),var(--gold-light)); color:var(--navy-dark); border:none; border-radius:10px; font-weight:800; font-size:16px; cursor:pointer; }
+.checkout-btn:hover { opacity:0.9; }
+.empty-cart { text-align:center; padding:60px 20px; color:#888; }
+.back-link { display:inline-block; margin-bottom:20px; color:var(--gold-primary); text-decoration:none; font-weight:700; }
+/* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="#" onclick="history.back(); return false;" class="back-link"><i class="fas fa-arrow-right"></i> بازگشت</a>
+<h1>سبد خرید شما</h1>
+<div id="cartItemsContainer"></div>
+<div class="cart-summary" id="cartSummary" style="display:none;">
+    <div class="total-row">
+        <span>مبلغ قابل پرداخت:</span>
+        <span id="totalAmount"></span>
+    </div>
+    <button class="checkout-btn" onclick="proceedToPayment()">
+        <i class="fas fa-credit-card"></i> پرداخت و تکمیل سفارش
+    </button>
+</div>
+</div>
+
+<script src="../cart.js"></script>
+<script>
+function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById('cartItemsContainer');
+    const summary = document.getElementById('cartSummary');
+
+    if (!cart || cart.length === 0) {
+        container.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart" style="font-size:50px;margin-bottom:15px;display:block;"></i>سبد خرید شما خالی است</div>';
+        summary.style.display = 'none';
+        return;
+    }
+
+    container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <img src="${item.image}" alt="${item.title}">
+            <div class="cart-item-info">
+                <h3>${item.title}</h3>
+                <div>${Number(item.price).toLocaleString('fa-IR')} تومان</div>
+                <div class="qty-controls">
+                    <button onclick="changeItemQty('${item.id}', -1)">−</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeItemQty('${item.id}', 1)">+</button>
+                </div>
+            </div>
+            <button class="remove-btn" type="button" onclick="removeItem('${item.id}')">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    `).join('');
+
+    summary.style.display = 'block';
+    document.getElementById('totalAmount').textContent = getCartTotal().toLocaleString('fa-IR') + ' تومان';
+}
+
+function changeItemQty(id, delta) {
+    const cart = getCart();
+    // بررسی شناسه هم به صورت عددی و هم رشته‌ای
+    const item = cart.find(i => String(i.id) === String(id));
+    if (item) {
+        const newQty = item.quantity + delta;
+        if (newQty <= 0) {
+            removeItem(id);
+        } else {
+            updateQuantity(item.id, newQty);
+            renderCart();
+        }
+    }
+}
+
+function removeItem(id) {
+    // فراخوانی تابع حذف
+    removeFromCart(id);
+    // رندر مجدد صفحه برای به‌روزرسانی لیست
+    renderCart();
+}
+
+async function proceedToPayment() {
+    const cart = getCart();
+    if (!cart || cart.length === 0) return;
+
+    const total = getCartTotal();
+    const description = cart.map(i => `${i.title} × ${i.quantity}`).join(' ، ');
+
+    try {
+        const response = await fetch('http://localhost:3000/request-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                amount: total,
+                description: description
+            })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            window.location.href = data.url;
+        } else {
+            alert('خطا در ایجاد لینک پرداخت. لطفاً دوباره تلاش کنید.');
+        }
+    } catch (err) {
+        alert('ارتباط با سرور پرداخت برقرار نشد.');
+        console.error(err);
+    }
+}
+
+// اجرا هنگام بارگذاری
+renderCart();
+</script>

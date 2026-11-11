@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات محصول | ATA Battery</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Vazirmatn', sans-serif; background: var(--white); color: var(--navy-dark); line-height: 1.8; }
+
+        /* هدر و فوتر از common.css میان؛ اینجا فقط عرض محتوای این صفحه تعریف می‌شه */
+        .detail-container { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
+
+        .page-content { margin-top: 82px; padding: 60px 0; min-height: 80vh; }
+
+        .breadcrumb { display: flex; gap: 10px; margin-bottom: 40px; font-size: 14px; color: #666; }
+        .breadcrumb a { color: var(--gold-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; direction: ltr; }
+        .detail-grid > * { direction: rtl; }
+
+        .product-image-container { position: sticky; top: 100px; background: var(--gray-light); border-radius: 20px; padding: 40px; text-align: center; border: 2px solid transparent; transition: var(--transition); }
+        .product-image-container:hover { border-color: var(--gold-primary); box-shadow: 0 20px 50px rgba(10,31,61,0.15); }
+        .product-image { max-width: 100%; height: auto; border-radius: 10px; transition: var(--transition); }
+        .product-image-container:hover .product-image { transform: scale(1.05); }
+
+        .product-info-box { background: var(--white); border: 3px solid var(--gold-primary); border-radius: 20px; padding: 40px; box-shadow: 0 15px 40px rgba(10,31,61,0.15); position: relative; }
+
+        .warranty-badge-small { position: absolute; top: -20px; left: 30px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-light)); color: var(--navy-dark); padding: 10px 25px; border-radius: 30px; font-weight: 900; font-size: 16px; box-shadow: 0 5px 15px rgba(201,162,39,0.4); display: flex; align-items: center; gap: 8px; }
+
+        .product-title { font-size: 32px; font-weight: 900; color: var(--navy-dark); margin-bottom: 15px; margin-top: 10px; }
+        .product-description { color: #555; margin-bottom: 30px; line-height: 1.9; text-align: justify; }
+
+        .after-sales-box { background: rgba(201,162,39,0.1); border-right: 4px solid var(--gold-primary); padding: 20px; border-radius: 10px; margin-bottom: 30px; }
+        .after-sales-box h4 { color: var(--navy-dark); font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .after-sales-box p { color: #444; font-size: 15px; }
+
+        .specs-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .specs-table tr { border-bottom: 1px solid #eee; }
+        .specs-table tr:last-child { border-bottom: none; }
+        .specs-table td { padding: 15px 10px; font-size: 16px; }
+        .specs-table td:first-child { font-weight: 700; color: var(--navy-dark); width: 40%; display: flex; align-items: center; gap: 10px; }
+        .specs-table td:first-child i { color: var(--gold-primary); width: 20px; text-align: center; }
+        .specs-table td:last-child { color: #333; font-weight: 600; text-align: left; direction: ltr; }
+
+        .action-buttons { display: flex; gap: 15px; margin-top: 30px; }
+        .btn { padding: 15px 30px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: var(--transition); border: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; flex: 1; }
+        .btn-primary { background: linear-gradient(135deg, var(--gold-primary), var(--gold-light)); color: var(--navy-dark); box-shadow: 0 8px 25px rgba(201,162,39,0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(201,162,39,0.5); }
+        .btn-secondary { background: var(--white); color: var(--navy-dark); border: 2px solid var(--navy-dark); }
+        .btn-secondary:hover { background: var(--navy-dark); color: var(--white); }
+
+        @media (max-width: 992px) {
+            .detail-grid { grid-template-columns: 1fr; direction: rtl; }
+            .product-image-container { position: relative; top: 0; margin-bottom: 30px; }
+        }
+        @media (max-width: 768px) {
+            .page-content { margin-top: 64px; }
+        }
+        /* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- navbar: از partials/navbar.html به‌صورت داینامیک لود می‌شه -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="detail-container">
+            <div class="breadcrumb">
+                <a href="/index.html">خانه</a> / <a href="product.html">محصولات</a> / <span id="breadcrumbName">محصول</span>
+            </div>
+
+            <div class="detail-grid">
+                <!-- Left Side: Image -->
+                <div class="product-image-container">
+                    <img id="productImage" src="" alt="تصویر محصول" class="product-image">
+                </div>
+
+                <!-- Right Side: Info Box -->
+                <div class="product-info-box">
+                    <div class="warranty-badge-small">
+                        <i class="fas fa-shield-alt"></i>
+                        <span id="productWarranty">15 ماه گارانتی تعویض</span>
+                    </div>
+
+                    <h1 class="product-title" id="productTitle">در حال بارگذاری...</h1>
+
+                    <p class="product-description" id="productDescription"></p>
+
+                    <div class="after-sales-box">
+                        <h4><i class="fas fa-headset"></i> خدمات پس از فروش ATA</h4>
+                        <p>
+                            در صورت بروز هرگونه مشکل فنی در دوره گارانتی، کافی است به نزدیک‌ترین نمایندگی مجاز ATA مراجعه کنید یا با شماره <strong>021-12345678</strong> تماس بگیرید. تیم پشتیبانی ما به صورت 24 ساعته آماده راهنمایی و پیگیری درخواست شما هستند.
+                        </p>
+                    </div>
+
+                    <table class="specs-table">
+                        <tr>
+                            <td><i class="fas fa-barcode"></i> کد باتری</td>
+                            <td id="specCode"></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-bolt"></i> ولتاژ</td>
+                            <td id="specVoltage"></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-battery-full"></i> ظرفیت (آمپر)</td>
+                            <td id="specCapacity"></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-ruler-horizontal"></i> طول</td>
+                            <td id="specLength"></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-ruler-vertical"></i> عرض</td>
+                            <td id="specWidth"></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-arrows-alt-v"></i> ارتفاع</td>
+                            <td id="specHeight"></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-weight-hanging"></i> وزن</td>
+                            <td id="specWeight"></td>
+                        </tr>
+                    </table>
+
+                    <div class="quantity-selector" style="display:flex; align-items:center; gap:15px; margin-top:20px; margin-bottom:15px;">
+                        <span style="font-weight:700;">تعداد:</span>
+                        <button onclick="changeQty(-1)" style="width:36px;height:36px;border-radius:8px;border:2px solid var(--navy-dark);background:white;cursor:pointer;font-size:18px;">−</button>
+                        <span id="qtyDisplay" style="font-size:18px;font-weight:800;min-width:30px;text-align:center;">1</span>
+                        <button onclick="changeQty(1)" style="width:36px;height:36px;border-radius:8px;border:2px solid var(--navy-dark);background:white;cursor:pointer;font-size:18px;">+</button>
+                    </div>
+
+                    <div style="font-size:22px;font-weight:900;color:var(--navy-dark);margin-bottom:20px;">
+                        قیمت: <span id="productPrice"></span> تومان
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="addCurrentToCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد خرید
+                        </button>
+                        <a href="cart.html" class="btn btn-secondary">
+                            <i class="fas fa-shopping-bag"></i>
+                            مشاهده سبد خرید
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer: از partials/footer.html به‌صورت داینامیک لود می‌شه -->
+    <div id="footer-placeholder"></div>
+
+    <!-- include.js شامل navbar-placeholder و footer-placeholder رو لود می‌کنه -->
+    <script src="../assets/js/include.js"></script>
+
+    <!-- دیتای محصولات: همون فایل مشترکی که product.html هم ازش استفاده می‌کنه -->
+    <script src="../assets/js/products-data.js"></script>
+
+    <script>
+        // ===================================================================
+        // خواندن id از URL و نمایش اطلاعات همون محصول
+        // PRODUCTS الان یه آرایه‌ست (نه آبجکت کلید-دار)، پس با find پیداش می‌کنیم
+        // ===================================================================
+        function findProductById(id) {
+            return PRODUCTS.find(function (p) { return String(p.id) === String(id); });
+        }
+
+        function loadProductDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const product = findProductById(id);
+
+            if (!product) {
+                document.getElementById('productTitle').textContent = "محصول یافت نشد";
+                document.getElementById('productDescription').textContent = "متاسفانه محصول مورد نظر شما یافت نشد. لطفاً از صفحه محصولات مجدداً تلاش کنید.";
+                document.getElementById('breadcrumbName').textContent = "یافت نشد";
+                return;
+            }
+
+            document.title = product.title + " | ATA Battery";
+            document.getElementById('breadcrumbName').textContent = product.title;
+            document.getElementById('productImage').src = product.image;
+            document.getElementById('productImage').alt = product.title;
+            document.getElementById('productWarranty').textContent = product.warranty;
+            document.getElementById('productPrice').textContent = product.price.toLocaleString('fa-IR');
+            document.getElementById('productTitle').textContent = product.title;
+            document.getElementById('productDescription').textContent = product.description;
+            document.getElementById('specCode').textContent = product.code;
+            document.getElementById('specVoltage').textContent = product.voltage;
+            document.getElementById('specCapacity').textContent = product.capacity;
+            document.getElementById('specLength').textContent = product.length;
+            document.getElementById('specWidth').textContent = product.width;
+            document.getElementById('specHeight').textContent = product.height;
+            document.getElementById('specWeight').textContent = product.weight;
+        }
+
+        window.addEventListener('DOMContentLoaded', loadProductDetail);
+
+        let currentQty = 1;
+
+        function changeQty(delta) {
+            currentQty = Math.max(1, currentQty + delta);
+            document.getElementById('qtyDisplay').textContent = currentQty;
+        }
+
+        function addCurrentToCart() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const product = findProductById(id);
+            if (!product) return;
+
+            if (typeof addToCart === 'function') {
+                addToCart({ id: product.id, title: product.title, price: product.price, image: product.image }, currentQty);
+            } else {
+                console.warn('addToCart از cart.js پیدا نشد.');
+            }
+
+            alert('محصول به سبد خرید اضافه شد ✓');
+        }
+
+        // هایلایت کردن گزینه‌ی فعال منو بعد از لود navbar
+        function highlightActiveNav() {
+            const dropdownParents = document.querySelectorAll('.nav-menu > .nav-item > span.nav-link');
+            dropdownParents.forEach(function (span) {
+                if (span.textContent.trim().indexOf('محصولات') === 0) {
+                    span.classList.add('active');
+                }
+            });
+        }
+        document.addEventListener('partLoaded', function (e) {
+            if (e.detail.id === 'navbar-placeholder') highlightActiveNav();
+        });
+    </script>
+    <script src="../cart.js"></script>
+</body>
+</html>

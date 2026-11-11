@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">مقاله | ATA Battery</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        :root { --gray-text: #6C757D; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Vazirmatn', sans-serif; background: var(--gray-light); color: var(--navy-dark); line-height: 1.8; overflow-x: hidden; }
+
+        .article-container { max-width: 900px; margin: 0 auto; padding: 0 30px; }
+        .page-content { margin-top: 82px; }
+
+        /* ================= ARTICLE HERO ================= */
+        .article-hero {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+            padding: 60px 0 90px;
+            position: relative;
+            overflow: hidden;
+        }
+        .article-hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 70%);
+            animation: pulse 8s infinite alternate;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+        .breadcrumb {
+            position: relative; z-index: 1; display: flex; align-items: center; gap: 8px;
+            font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 25px;
+        }
+        .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; transition: var(--transition); }
+        .breadcrumb a:hover { color: var(--gold-primary); }
+        .breadcrumb i { font-size: 11px; }
+
+        .category-badge {
+            position: relative; z-index: 1; display: inline-block;
+            background: var(--gold-primary); color: var(--navy-dark);
+            padding: 6px 16px; border-radius: 8px; font-weight: 800; font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .article-hero h1 {
+            position: relative; z-index: 1;
+            font-size: 38px; font-weight: 900; color: var(--white);
+            margin-bottom: 20px; line-height: 1.5;
+        }
+        .article-hero .post-meta {
+            position: relative; z-index: 1;
+            display: flex; gap: 20px; flex-wrap: wrap;
+            font-size: 14px; color: rgba(255,255,255,0.75);
+        }
+        .article-hero .post-meta span { display: flex; align-items: center; gap: 6px; }
+        .article-hero .post-meta i { color: var(--gold-primary); }
+
+        /* ================= ARTICLE BODY ================= */
+        .article-body-wrap { margin-top: -50px; position: relative; z-index: 5; margin-bottom: 60px; }
+        .article-card {
+            background: var(--white); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 40px rgba(10,31,61,0.1);
+        }
+        .article-cover { width: 100%; height: 400px; overflow: hidden; }
+        .article-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+        .article-content { padding: 50px; }
+        .article-content p { color: var(--navy-dark); font-size: 16px; margin-bottom: 22px; }
+        .article-content h2 {
+            font-size: 24px; font-weight: 800; margin: 35px 0 18px;
+            padding-right: 15px; border-right: 4px solid var(--gold-primary);
+        }
+        .article-content ul { margin: 0 0 22px 0; padding-right: 25px; }
+        .article-content li { margin-bottom: 10px; font-size: 16px; }
+        .article-content li::marker { color: var(--gold-primary); }
+
+        .article-footer {
+            padding: 30px 50px; border-top: 1px solid #eee;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .share-box { display: flex; align-items: center; gap: 12px; }
+        .share-box span { font-size: 14px; color: var(--gray-text); font-weight: 700; }
+        .share-icons { display: flex; gap: 10px; }
+        .share-icons a {
+            width: 38px; height: 38px; border-radius: 50%; background: var(--gray-light);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--navy-dark); text-decoration: none; transition: var(--transition);
+        }
+        .share-icons a:hover { background: var(--gold-primary); color: var(--navy-dark); transform: translateY(-3px); }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--navy-dark); font-weight: 700; text-decoration: none; transition: var(--transition);
+        }
+        .back-link:hover { color: var(--gold-primary); gap: 12px; }
+
+        /* ================= RELATED POSTS ================= */
+        .related-section { margin-bottom: 60px; }
+        .related-section h2 { font-size: 26px; font-weight: 800; margin-bottom: 25px; }
+        .related-section h2 span { color: var(--gold-primary); }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .related-card {
+            background: var(--white); border-radius: 14px; overflow: hidden; text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04); transition: var(--transition); display: block;
+        }
+        .related-card:hover { transform: translateY(-6px); box-shadow: 0 15px 30px rgba(10,31,61,0.1); }
+        .related-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+        .related-card-content { padding: 18px; }
+        .related-card-content h4 { font-size: 15px; font-weight: 700; color: var(--navy-dark); line-height: 1.6; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .page-content { margin-top: 64px; }
+            .article-hero h1 { font-size: 26px; }
+            .article-content, .article-footer { padding: 25px; }
+            .article-cover { height: 220px; }
+        }
+        /* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="page-content">
+        <section class="article-hero">
+            <div class="article-container">
+                <div class="breadcrumb">
+                    <a href="blog.html">وبلاگ</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <span id="crumbCategory">دسته‌بندی</span>
+                </div>
+                <span class="category-badge" id="articleCategory">دسته‌بندی</span>
+                <h1 id="articleTitle">در حال بارگذاری...</h1>
+                <div class="post-meta">
+                    <span><i class="far fa-calendar"></i> <span id="articleDate"></span></span>
+                    <span><i class="far fa-clock"></i> <span id="articleReadTime"></span></span>
+                    <span><i class="far fa-user"></i> <span id="articleAuthor"></span></span>
+                    <span><i class="far fa-eye"></i> <span id="articleViews"></span></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="article-container">
+            <div class="article-body-wrap reveal">
+                <article class="article-card">
+                    <div class="article-cover">
+                        <img id="articleImage" src="" alt="">
+                    </div>
+                    <div class="article-content" id="articleContent">
+                        <!-- محتوای مقاله اینجا با جاوااسکریپت پر می‌شود -->
+                    </div>
+                    <div class="article-footer">
+                        <a href="blog.html" class="back-link"><i class="fas fa-arrow-right"></i> بازگشت به وبلاگ</a>
+                        <div class="share-box">
+                            <span>اشتراک‌گذاری:</span>
+                            <div class="share-icons">
+                                <a href="#" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
+                                <a href="#" title="واتساپ"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" title="کپی لینک" id="copyLinkBtn"><i class="fas fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <section class="related-section reveal">
+                <h2>مطالب <span>مرتبط</span></h2>
+                <div class="related-grid" id="relatedGrid"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../assets/js/include.js"></script>
+
+    <script>
+        // ===================== بانک اطلاعاتی مقالات =====================
+        // برای افزودن مقاله جدید، فقط یک آبجکت جدید با id یکتا به این آرایه اضافه کنید
+        const articlesData = [
+            {
+                id: 1,
+                title: "۱۰ راز طلایی برای افزایش عمر باتری خودرو در زمستان",
+                category: "نکات نگهداری",
+                categoryFilter: "tips",
+                date: "۱۵ آبان ۱۴۰۵",
+                readTime: "۸ دقیقه مطالعه",
+                author: "تیم فنی ATA",
+                views: "۱,۲۴۵ بازدید",
+                image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                content: `
+                    <p>سرمای هوا یکی از بزرگترین دشمنان باتری خودرو است. کاهش دما باعث می‌شود واکنش‌های شیمیایی داخل باتری کندتر انجام شوند و توان تولید جریان آن به‌شدت افت کند. در این مقاله، متخصصان آتا باتری راهکارهای عملی و آزموده‌شده‌ای را برای محافظت از باتری در فصل سرما ارائه می‌دهند.</p>
+                    <h2>۱. شارژ باتری را همیشه کامل نگه دارید</h2>
+                    <p>باتری‌هایی که به‌طور کامل شارژ نیستند، در دمای پایین سریع‌تر یخ می‌زنند. اطمینان حاصل کنید ولتاژ باتری همیشه در محدوده استاندارد باقی بماند.</p>
+                    <h2>۲. ترمینال‌ها را تمیز و محکم نگه دارید</h2>
+                    <p>جرم‌گرفتگی روی ترمینال‌ها مقاومت الکتریکی را افزایش داده و استارت خودرو را در هوای سرد دشوارتر می‌کند.</p>
+                    <ul>
+                        <li>هر ماه ترمینال‌ها را بازرسی کنید</li>
+                        <li>در صورت وجود خوردگی، با محلول جوش‌شیرین تمیز کنید</li>
+                        <li>پیچ‌ها را محکم اما بدون فشار زیاد ببندید</li>
+                    </ul>
+                    <h2>۳. از سفرهای کوتاه مکرر پرهیز کنید</h2>
+                    <p>سفرهای کوتاه فرصت کافی برای شارژ مجدد باتری توسط دینام را نمی‌دهند. در صورت امکان، حداقل یک سفر طولانی‌تر در هفته داشته باشید تا باتری به‌طور کامل شارژ شود.</p>
+                    <p>با رعایت این نکات ساده، می‌توانید عمر مفید باتری خودروی خود را به‌طور قابل‌توجهی افزایش داده و از خرابی‌های ناگهانی در سرمای زمستان جلوگیری کنید.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "چگونه بهترین باتری را برای خودروی خود انتخاب کنیم؟",
+                category: "باتری خودرو",
+                categoryFilter: "car",
+                date: "۱۰ آبان ۱۴۰۵",
+                readTime: "۶ دقیقه مطالعه",
+                author: "تیم فنی ATA",
+                views: "۱,۲۴۵ بازدید",
+                image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                content: `
+                    <p>انتخاب باتری مناسب برای خودرو تنها به قیمت محدود نمی‌شود؛ آمپر، برند و نوع استفاده از خودرو نقش مهمی در این انتخاب دارند.</p>
+                    <h2>۱. آمپر مناسب خودروی خود را بشناسید</h2>
+                    <p>همیشه آمپر باتری پیشنهادی کارخانه سازنده خودرو را مبنا قرار دهید. آمپر بسیار پایین‌تر یا بالاتر می‌تواند به سیستم برقی خودرو آسیب بزند.</p>
+                    <h2>۲. نوع استفاده از خودرو را در نظر بگیرید</h2>
+                    <p>خودروهایی که مسافت‌های طولانی طی می‌کنند نیاز متفاوتی نسبت به خودروهایی دارند که عمدتاً در شهر و مسافت‌های کوتاه استفاده می‌شوند.</p>
+                    <p>در نهایت، انتخاب برندی معتبر با گارانتی مناسب، اطمینان خاطر بیشتری برای شما به همراه خواهد داشت.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "تفاوت باتری‌های سیلد اسید و ژل در سیستم‌های UPS",
+                category: "باتری UPS",
+                categoryFilter: "ups",
+                date: "۵ آبان ۱۴۰۵",
+                readTime: "۷ دقیقه مطالعه",
+                author: "تیم فنی ATA",
+                views: "۸۹۰ بازدید",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                content: `
+                    <p>در سیستم‌های برق اضطراری (UPS)، انتخاب بین باتری‌های سیلد اسید (SLA) و ژل، تاثیر مستقیمی بر عملکرد و طول عمر سیستم دارد.</p>
+                    <h2>باتری سیلد اسید (AGM)</h2>
+                    <p>این باتری‌ها هزینه پایین‌تری دارند و برای اکثر کاربردهای عمومی UPS مناسب هستند.</p>
+                    <h2>باتری ژل</h2>
+                    <p>باتری‌های ژل مقاومت بالاتری در برابر دماهای بالا و دشارژ عمیق دارند، اما قیمت بالاتری نیز دارند.</p>
+                    <p>برای مراکز داده و تجهیزات حساس، معمولاً باتری ژل به دلیل پایداری بیشتر توصیه می‌شود.</p>
+                `
+            },
+            {
+                id: 4,
+                title: "افتتاح خط تولید جدید باتری‌های نسل چهارم ATA",
+                category: "اخبار شرکت",
+                categoryFilter: "news",
+                date: "۱ آبان ۱۴۰۵",
+                readTime: "۴ دقیقه مطالعه",
+                author: "روابط عمومی ATA",
+                views: "۲,۱۰۰ بازدید",
+                image: "https://images.unsplash.com/photo-1565514020176-db79364962bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                content: `
+                    <p>با افتخار اعلام می‌کنیم که خط تولید جدید کارخانه آتا باتری با تکنولوژی روز اروپا راه‌اندازی شد. این خط تولید، ظرفیت تولید شرکت را به میزان قابل توجهی افزایش می‌دهد.</p>
+                    <h2>ویژگی‌های خط تولید جدید</h2>
+                    <ul>
+                        <li>افزایش ظرفیت تولید روزانه</li>
+                        <li>کاهش ضایعات تولید با کنترل کیفیت هوشمند</li>
+                        <li>انطباق کامل با استانداردهای زیست‌محیطی اروپا</li>
+                    </ul>
+                    <p>این سرمایه‌گذاری بخشی از برنامه بلندمدت آتا باتری برای ارتقای کیفیت و رقابت‌پذیری در بازارهای داخلی و صادراتی است.</p>
+                `
+            },
+            {
+                id: 5,
+                title: "نشانه‌های خرابی دینام و تاثیر آن بر باتری",
+                category: "نکات نگهداری",
+                categoryFilter: "tips",
+                date: "۲۸ مهر ۱۴۰۵",
+                readTime: "۵ دقیقه مطالعه",
+                author: "تیم فنی ATA",
+                views: "۱,۵۶۰ بازدید",
+                image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                content: `
+                    <p>بسیاری از خرابی‌های زودهنگام باتری، در واقع ناشی از عملکرد نادرست دینام هستند نه خود باتری. شناخت علائم هشداردهنده می‌تواند از هزینه‌های اضافی جلوگیری کند.</p>
+                    <h2>مهم‌ترین نشانه‌های خرابی دینام</h2>
+                    <ul>
+                        <li>روشن و خاموش شدن چراغ هشدار باتری روی داشبورد</li>
+                        <li>کم‌نور شدن یا پرنوسان بودن چراغ‌های خودرو</li>
+                        <li>خالی شدن مکرر باتری با وجود شارژ کامل اولیه</li>
+                        <li>شنیدن صدای غیرعادی از ناحیه موتور</li>
+                    </ul>
+                    <p>در صورت مشاهده هر یک از این علائم، توصیه می‌شود هرچه سریع‌تر سیستم شارژ خودرو را توسط تکنسین متخصص بررسی کنید.</p>
+                `
+            }
+        ];
+
+        // ===================== نمایش مقاله بر اساس id توی URL =====================
+        const params = new URLSearchParams(window.location.search);
+        const articleId = parseInt(params.get('id')) || 1;
+        const article = articlesData.find(a => a.id === articleId) || articlesData[0];
+
+        document.getElementById('pageTitle').textContent = article.title + ' | ATA Battery';
+        document.getElementById('crumbCategory').textContent = article.category;
+        document.getElementById('articleCategory').textContent = article.category;
+        document.getElementById('articleTitle').textContent = article.title;
+        document.getElementById('articleDate').textContent = article.date;
+        document.getElementById('articleReadTime').textContent = article.readTime;
+        document.getElementById('articleAuthor').textContent = article.author;
+        document.getElementById('articleViews').textContent = article.views;
+        document.getElementById('articleImage').src = article.image;
+        document.getElementById('articleImage').alt = article.title;
+        document.getElementById('articleContent').innerHTML = article.content;
+
+        // مطالب مرتبط: بقیه مقالات (حداکثر ۳ مورد)، ترجیحاً هم‌دسته
+        const related = articlesData
+            .filter(a => a.id !== article.id)
+            .sort((a, b) => (a.categoryFilter === article.categoryFilter ? -1 : 1))
+            .slice(0, 3);
+
+        const relatedGrid = document.getElementById('relatedGrid');
+        related.forEach(r => {
+            const a = document.createElement('a');
+            a.href = `article.html?id=${r.id}`;
+            a.className = 'related-card';
+            a.innerHTML = `
+                <img src="${r.image}" alt="${r.title}">
+                <div class="related-card-content"><h4>${r.title}</h4></div>
+            `;
+            relatedGrid.appendChild(a);
+        });
+
+        // کپی لینک
+        document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('لینک مقاله کپی شد!');
+            });
+        });
+
+        // هایلایت منو
+        function highlightActiveNav() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            const directLinks = document.querySelectorAll('.nav-menu > .nav-item > a.nav-link');
+            directLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop().split('?')[0];
+                if (linkPath === currentPath) link.classList.add('active');
+            });
+        }
+        document.addEventListener('partLoaded', function (e) {
+            if (e.detail.id === 'navbar-placeholder') highlightActiveNav();
+        });
+
+        // انیمیشن اسکرول
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach((el) => {
+                const top = el.getBoundingClientRect().top;
+                if (top < windowHeight - 100) el.classList.add('active');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
+</body>
+</html>

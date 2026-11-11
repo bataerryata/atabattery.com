@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>همکاری با ما و فرصت‌های شغلی | ATA Battery</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/common.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--white, #ffffff);
+    color: var(--navy-dark);
+    line-height: 1.8;
+    min-height: 100vh;
+    padding-top: 82px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+صفحه‌ی فرصت‌های شغلی (Careers Hero & Content)
+============================================ */
+.careers-hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+    color: var(--white);
+    padding: 60px 20px;
+    text-align: right;
+    overflow: hidden;
+    border-bottom: 3px solid var(--gold-primary);
+}
+
+.careers-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 10% 50%, rgba(201,162,39,0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.careers-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    color: var(--white);
+}
+
+.careers-hero h1 span {
+    color: var(--gold-primary);
+}
+
+.breadcrumb {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition, all 0.3s ease);
+}
+
+.breadcrumb a:hover {
+    color: var(--gold-primary);
+}
+
+/* بخش انتخاب شهر / موقعیت‌های شغلی */
+.careers-content {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 70px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.careers-title-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.careers-title-section h2 {
+    color: var(--navy-dark);
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.careers-title-section p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.location-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-8px);
+}
+
+.pin-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%);
+    transition: background 0.3s ease;
+}
+
+.pin-icon {
+    font-size: 100px;
+    color: #e63946;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
+    transition: filter 0.3s ease, color 0.3s ease;
+}
+
+.location-card:hover .pin-icon {
+    filter: drop-shadow(0 15px 25px rgba(230, 57, 70, 0.35));
+}
+
+/* حالت انتخاب‌شده */
+.location-card.active-location .pin-wrapper {
+    background: radial-gradient(circle, rgba(201,162,39,0.2) 0%, transparent 70%);
+}
+.location-card.active-location .pin-icon {
+    color: var(--gold-primary);
+    filter: drop-shadow(0 15px 25px rgba(201,162,39,0.4));
+}
+.location-card.active-location .location-name {
+    color: var(--gold-primary);
+}
+
+.location-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--navy-dark);
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+
+.job-count-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--navy-dark);
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.location-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.location-radio:checked {
+    border-color: var(--gold-primary);
+    background-color: var(--gold-primary);
+    box-shadow: inset 0 0 0 4px var(--white);
+}
+
+/* ============================================
+بخش نمایش موقعیت‌های شغلی
+============================================ */
+.jobs-section {
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 70px;
+    display: none;
+    animation: fadeInUp 0.5s ease forwards;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.jobs-section-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+.jobs-section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--navy-dark);
+}
+.jobs-section-header h2 span {
+    color: var(--gold-primary);
+}
+.jobs-section-header p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.job-card {
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    transition: var(--transition, all 0.3s ease);
+    display: flex;
+    flex-direction: column;
+}
+.job-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(10,31,61,0.1);
+    border-color: var(--gold-primary);
+}
+
+.job-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.job-card-header h3 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--navy-dark);
+    line-height: 1.6;
+}
+.job-type {
+    flex-shrink: 0;
+    background: rgba(201,162,39,0.12);
+    color: var(--gold-primary);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.job-desc {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.job-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 18px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 14px;
+}
+.job-meta span { display: flex; align-items: center; gap: 6px; }
+.job-meta i { color: var(--gold-primary); }
+
+.apply-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light, #e0c060));
+    color: var(--navy-dark);
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    transition: var(--transition, all 0.3s ease);
+}
+.apply-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201,162,39,0.3);
+}
+
+.no-jobs {
+    text-align: center;
+    color: #888;
+    font-size: 15px;
+    padding: 40px 20px;
+    grid-column: 1 / -1;
+    background: var(--gray-light, #f8f9fa);
+    border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+    body { padding-top: 64px; }
+    .careers-hero { padding: 40px 20px; }
+    .careers-hero h1 { font-size: 1.6rem; }
+    .locations-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+    .jobs-grid { grid-template-columns: 1fr; }
+}
+/* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar Placeholder -->
+<div id="navbar-placeholder"></div>
+
+<!-- Banner Header Section -->
+<section class="careers-hero">
+    <div class="hero-container">
+        <h1>همکاری با ما و <span>فرصت‌های شغلی</span></h1>
+        <div class="breadcrumb">
+            <a href="/">صفحه اصلی</a>
+            <span>/</span>
+            <span>همکاری با ما و فرصت‌های شغلی</span>
+        </div>
+    </div>
+</section>
+
+<!-- Main Careers Section -->
+<main class="careers-content">
+    <div class="careers-title-section">
+        <h2>فرصت‌های شغلی فعال به تفکیک شهر</h2>
+        <p>لطفاً شهر مورد نظر خود را جهت مشاهده موقعیت‌های شغلی انتخاب کنید.</p>
+    </div>
+
+    <div class="locations-grid" id="locationsGrid">
+        <!-- تبریز -->
+        <label class="location-card" data-city="tabriz">
+            <div class="pin-wrapper">
+                <i class="fa-solid fa-location-dot pin-icon"></i>
+            </div>
+            <span class="job-count-badge" data-count-for="tabriz"></span>
+            <span class="location-name">تبریز</span>
+            <input type="radio" name="location" value="tabriz" class="location-radio">
+        </label>
+
+        <!-- قم -->
+        <label class="location-card" data-city="qom">
+            <div class="pin-wrapper">
+                <i class="fa-solid fa-location-dot pin-icon"></i>
+            </div>
+            <span class="job-count-badge" data-count-for="qom"></span>
+            <span class="location-name">قم</span>
+            <input type="radio" name="location" value="qom" class="location-radio">
+        </label>
+
+        <!-- اشتهارد -->
+        <label class="location-card" data-city="eshtehard">
+            <div class="pin-wrapper">
+                <i class="fa-solid fa-location-dot pin-icon"></i>
+            </div>
+            <span class="job-count-badge" data-count-for="eshtehard"></span>
+            <span class="location-name">اشتهارد</span>
+            <input type="radio" name="location" value="eshtehard" class="location-radio">
+        </label>
+    </div>
+
+    <!-- بخش نمایش شغل‌های شهر انتخاب‌شده -->
+    <section class="jobs-section" id="jobsSection">
+        <div class="jobs-section-header">
+            <h2>موقعیت‌های شغلی در <span id="jobsCityName"></span></h2>
+            <p>برای ارسال رزومه، روی دکمه‌ی «ارسال رزومه» هر موقعیت کلیک کنید.</p>
+        </div>
+        <div class="jobs-grid" id="jobsGrid"></div>
+    </section>
+</main>
+
+<!-- Footer Placeholder -->
+<div id="footer-placeholder"></div>
+
+<!-- Dynamic Header & Footer Include Script -->
+<script src="../assets/js/include.js"></script>
+
+<script>
+    // =====================================================
+    // بانک شغل‌ها به تفکیک شهر
+    // برای افزودن شغل جدید، فقط یک آبجکت به آرایه‌ی همون شهر اضافه کنید
+    // برای افزودن شهر جدید: هم اینجا کلید جدید بسازید، هم یک location-card
+    // با data-city و value رادیو مطابق همون کلید در HTML اضافه کنید
+    // =====================================================
+    const jobsData = {
+        tabriz: [
+            {
+                title: "اپراتور خط تولید باتری",
+                type: "تمام‌وقت",
+                location: "تبریز، شهرک صنعتی",
+                description: "نیازمند نیروی مسلط به کار با خطوط تولید صنعتی، دارای روحیه کار تیمی و توانایی کار در شیفت.",
+                applyLink: "mailto:jobs@atabattery.com?subject=درخواست شغل - اپراتور خط تولید تبریز"
+            },
+            {
+                title: "کارشناس کنترل کیفیت (QC)",
+                type: "تمام‌وقت",
+                location: "تبریز",
+                description: "آشنا به استانداردهای ISO و روش‌های آزمون باتری، حداقل ۲ سال سابقه کار مرتبط.",
+                applyLink: "mailto:jobs@atabattery.com?subject=درخواست شغل - کارشناس QC تبریز"
+            },
+            {
+                title: "حسابدار صنعتی",
+                type: "تمام‌وقت",
+                location: "تبریز",
+                description: "تسلط به نرم‌افزارهای حسابداری و بهای تمام‌شده، مسلط به قوانین مالیاتی.",
+                applyLink: "mailto:jobs@atabattery.com?subject=درخواست شغل - حسابدار تبریز"
+            }
+        ],
+        qom: [
+            {
+                title: "کارشناس فروش و بازاریابی",
+                type: "تمام‌وقت",
+                location: "قم",
+                description: "دارای روابط عمومی بالا و آشنا به بازار قطعات خودرو، امکان سفرهای کاری استانی.",
+                applyLink: "mailto:jobs@atabattery.com?subject=درخواست شغل - کارشناس فروش قم"
+            },
+            {
+                title: "انباردار",
+                type: "تمام‌وقت",
+                location: "قم",
+                description: "آشنا به سیستم‌های انبارداری و کدینگ کالا، دقیق و منظم در ثبت ورود و خروج کالا.",
+                applyLink: "mailto:jobs@atabattery.com?subject=درخواست شغل - انباردار قم"
+            }
+        ],
+        eshtehard: [
+            {
+                title: "تکنسین برق و الکترونیک صنعتی",
+                type: "تمام‌وقت",
+                location: "اشتهارد، شهرک صنعتی",
+                description: "مسلط به تعمیرات تابلوهای برق صنعتی و عیب‌یابی تجهیزات خط تولید.",
+                applyLink: "mailto:jobs@atabattery.com?subject=درخواست شغل - تکنسین برق اشتهارد"
+            }
+        ]
+    };
+
+    const cityNames = { tabriz: "تبریز", qom: "قم", eshtehard: "اشتهارد" };
+
+    const jobsSection = document.getElementById('jobsSection');
+    const jobsGrid = document.getElementById('jobsGrid');
+    const jobsCityName = document.getElementById('jobsCityName');
+    const locationCards = document.querySelectorAll('.location-card');
+    const radios = document.querySelectorAll('.location-radio');
+
+    function renderJobCountBadges() {
+        document.querySelectorAll('[data-count-for]').forEach(badge => {
+            const city = badge.getAttribute('data-count-for');
+            const count = (jobsData[city] || []).length;
+            badge.textContent = count > 0 ? `${count} موقعیت فعال` : 'موقعیتی موجود نیست';
+        });
+    }
+
+    function showJobs(city) {
+        const jobs = jobsData[city] || [];
+        jobsCityName.textContent = cityNames[city] || '';
+        jobsGrid.innerHTML = '';
+
+        if (jobs.length === 0) {
+            jobsGrid.innerHTML = '<div class="no-jobs"><i class="fa-regular fa-folder-open" style="font-size:24px; display:block; margin-bottom:10px;"></i>در حال حاضر موقعیت شغلی فعالی در این شهر وجود ندارد.</div>';
+        } else {
+            jobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.innerHTML = `
+                    <div class="job-card-header">
+                        <h3>${job.title}</h3>
+                        <span class="job-type">${job.type}</span>
+                    </div>
+                    <p class="job-desc">${job.description}</p>
+                    <div class="job-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> ${job.location}</span>
+                    </div>
+                    <a href="${job.applyLink}" class="apply-btn">ارسال رزومه <i class="fas fa-paper-plane"></i></a>
+                `;
+                jobsGrid.appendChild(card);
+            });
+        }
+
+        jobsSection.style.display = 'block';
+        setTimeout(() => {
+            jobsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+
+        locationCards.forEach(card => card.classList.remove('active-location'));
+        const activeCard = document.querySelector(`.location-card[data-city="${city}"]`);
+        if (activeCard) activeCard.classList.add('active-location');
+    }
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => showJobs(radio.value));
+    });
+
+    // امکان کلیک روی کل کارت (نه فقط دایره‌ی رادیو) از قبل به‌خاطر تگ label کار می‌کند
+
+    renderJobCountBadges();
+</script>
+
+</body>
+</html>

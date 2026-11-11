@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درباره ما | ATA Battery</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        :root { 
+            --navy-dark: #0A1F3D; 
+            --petroleum-dark: #06283D; 
+            --gold-primary: #C9A227; 
+            --gold-light: #D4AF37; 
+            --white: #FFFFFF; 
+            --gray-light: #F8F9FA; 
+            --gray-text: #6C757D;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        /* * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Vazirmatn', sans-serif; background: var(--white); color: var(--navy-dark); line-height: 1.8; overflow-x: hidden; } */
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Vazirmatn', sans-serif; background: var(--gray-light); color: var(--navy-dark); line-height: 1.8;overflow-x: hidden; }
+        .contact-container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        /* ================= PAGE HERO ================= */
+        .page-content { margin-top: 70px; }
+        .about-hero {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        .about-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A227' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .about-hero h1 { font-size: 48px; font-weight: 900; color: var(--white); margin-bottom: 20px; position: relative; z-index: 1; }
+        .about-hero h1 span { color: var(--gold-primary); }
+        .about-hero p { color: rgba(255,255,255,0.85); font-size: 18px; max-width: 700px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.9; }
+
+        /* ================= INTRO SECTION ================= */
+        .intro-section { padding: 80px 0; background: var(--white); }
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .intro-image { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(10,31,61,0.15); }
+        .intro-image img { width: 100%; height: auto; display: block; transition: transform 0.6s ease; }
+        .intro-image:hover img { transform: scale(1.05); }
+        .intro-content h2 { font-size: 32px; font-weight: 800; margin-bottom: 25px; color: var(--navy-dark); line-height: 1.4; }
+        .intro-content h2 span { color: var(--gold-primary); }
+        .intro-content p { color: var(--gray-text); margin-bottom: 20px; font-size: 16px; text-align: justify; }
+        .signature { margin-top: 30px; display: flex; align-items: center; gap: 15px; }
+        .signature-img { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--gold-primary); }
+        .signature-text h4 { color: var(--navy-dark); font-size: 16px; font-weight: 700; }
+        .signature-text span { color: var(--gold-primary); font-size: 13px; }
+
+        /* ================= TIMELINE (STORY ROAD) - FIXED ================= */
+        .timeline-section { padding: 100px 0; background: var(--gray-light); position: relative; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h2 { font-size: 36px; font-weight: 900; color: var(--navy-dark); margin-bottom: 15px; }
+        .section-header h2 span { color: var(--gold-primary); }
+        .section-header p { color: var(--gray-text); max-width: 600px; margin: 0 auto; }
+
+        .timeline-container { position: relative; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+        /* Central Line - Fixed for perfect RTL centering */
+        .timeline-container::after {
+            content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, var(--gold-primary), var(--navy-dark));
+            top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px; position: relative; width: 50%; opacity: 0; transform: translateY(50px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+        
+        .timeline-item::after {
+            content: ''; position: absolute; width: 25px; height: 25px; background: var(--white);
+            border: 4px solid var(--gold-primary); top: 25px; border-radius: 50%; z-index: 1;
+            box-shadow: 0 0 0 4px rgba(201,162,39,0.2); transition: var(--transition);
+        }
+        .timeline-item:hover::after { background: var(--gold-primary); transform: scale(1.2); box-shadow: 0 0 0 8px rgba(201,162,39,0.1); }
+
+        /* Right Side Box (in RTL) - stacked in DOM order, aligned to the right */
+        .timeline-item.left { 
+            align-self: flex-start; 
+            text-align: right; 
+        }
+        /* Dot near the line but with a visible gap (not touching it) */
+        .timeline-item.left::after { 
+            left: 15px; 
+        }
+        .timeline-item.left .timeline-content { text-align: right; } 
+        
+        /* Left Side Box (in RTL) - stacked in DOM order, aligned to the left */
+        .timeline-item.right { 
+            align-self: flex-end; 
+            text-align: right; 
+        }
+        /* Dot near the line but with a visible gap (not touching it) */
+        .timeline-item.right::after { 
+            right: 15px; 
+        }
+
+        .timeline-content {
+            padding: 25px; background: var(--white); border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative;
+            border-top: 4px solid var(--gold-primary); transition: var(--transition);
+        }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        
+        .timeline-year {
+            display: inline-block; background: var(--navy-dark); color: var(--gold-primary);
+            padding: 5px 15px; border-radius: 20px; font-weight: 800; font-size: 18px;
+            margin-bottom: 15px; box-shadow: 0 4px 10px rgba(10,31,61,0.2);
+        }
+        .timeline-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: var(--navy-dark); }
+        .timeline-content p { color: var(--gray-text); font-size: 14px; line-height: 1.7; }
+        .timeline-logos { margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .timeline-logos span { font-size: 12px; background: var(--gray-light); padding: 4px 8px; border-radius: 4px; color: var(--navy-dark); font-weight: 600; }
+
+        /* ================= STATS SECTION ================= */
+        .stats-section {
+            background: linear-gradient(135deg, var(--navy-dark), var(--petroleum-dark));
+            padding: 80px 0; color: var(--white); text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; z-index: 1; }
+        .stat-item { padding: 20px; }
+        .stat-icon { font-size: 40px; color: var(--gold-primary); margin-bottom: 20px; }
+        .stat-number { font-size: 48px; font-weight: 900; color: var(--white); margin-bottom: 10px; font-family: 'Vazirmatn', sans-serif; }
+        .stat-label { font-size: 16px; opacity: 0.9; }
+
+        /* ================= VALUES SECTION ================= */
+        .values-section { padding: 100px 0; background: var(--white); }
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .value-card {
+            background: var(--white); padding: 40px 30px; border-radius: 20px;
+            text-align: center; border: 2px solid var(--gray-light); transition: var(--transition);
+        }
+        .value-card:hover { border-color: var(--gold-primary); transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+        .value-icon { width: 80px; height: 80px; background: rgba(201,162,39,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: var(--gold-primary); font-size: 32px; transition: var(--transition); }
+        .value-card:hover .value-icon { background: var(--gold-primary); color: var(--navy-dark); transform: rotateY(360deg); }
+        .value-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 15px; color: var(--navy-dark); }
+        .value-card p { color: var(--gray-text); font-size: 14px; line-height: 1.8; }
+
+        /* ================= FOOTER ================= */
+        .footer { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%); color: var(--white); padding: 50px 0 25px; border-top: 3px solid var(--gold-primary); }
+        .footer-content { display: grid; grid-template-columns: 1.5fr 2fr 1.5fr; gap: 50px; margin-bottom: 35px; }
+        .footer-logo h3 { color: var(--gold-primary); font-size: 24px; margin-bottom: 15px; }
+        .footer-logo p { opacity: 0.9; line-height: 1.8; margin-bottom: 15px; font-size: 14px; }
+        .footer-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .footer-links-grid a { color: var(--white); opacity: 0.9; padding: 6px 0; transition: var(--transition); display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14px; }
+        .footer-links-grid a:hover { color: var(--gold-primary); padding-right: 8px; }
+        .footer-links-grid a::before { content: '\f104'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 11px; color: var(--gold-primary); }
+        .social-section h4 { color: var(--gold-primary); font-size: 18px; margin-bottom: 15px; }
+        .social-section p { opacity: 0.9; margin-bottom: 15px; font-size: 14px; }
+        .social-icons { display: flex; gap: 12px; }
+        .social-icons a { width: 42px; height: 42px; background: rgba(255,255,255,0.1); border: 1.5px solid var(--gold-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); font-size: 18px; transition: var(--transition); text-decoration: none; }
+        .social-icons a:hover { background: var(--gold-primary); color: var(--navy-dark); transform: translateY(-4px) rotate(360deg); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 18px; text-align: center; opacity: 0.8; font-size: 13px; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 992px) {
+            .timeline-container::after { left: 30px; margin-left: 0; }
+            .timeline-item { width: 100%; padding-right: 80px; padding-left: 20px; }
+            .timeline-item.left, .timeline-item.right { text-align: right; align-self: stretch; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 18px; right: auto; }
+            .intro-grid, .values-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-menu { display: none; }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .about-hero h1 { font-size: 36px; }
+        }
+        @media (max-width: 576px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .timeline-content h3 { font-size: 18px; }
+        }
+        /* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <!-- <header class="header">b
+        <div class="header-top">
+            <div class="container">
+                <div class="header-content">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-icon">
+                            <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="200,20 245.5,31.2 274.7,70.6 323.4,76.2 355.9,110 368.9,155 349.4,200 368.9,245 355.9,290 323.4,323.8 274.7,329.4 245.5,368.8 200,380 154.5,368.8 125.3,329.4 76.6,323.8 44.1,290 31.1,245 50.6,200 31.1,155 44.1,110 76.6,76.2 125.3,70.6 154.5,31.2" fill="#0A1F3D" stroke="#C9A227" stroke-width="5" stroke-linejoin="miter"/>
+                                <polygon points="200,55 322,125 322,275 200,345 78,275 78,125" fill="none" stroke="#C9A227" stroke-width="1.5" opacity="0.8"/>
+                                <polygon points="209,110 119,218 200,218 191,290 281,182 200,182" fill="#D4AF37" stroke="#0A1F3D" stroke-width="2.5" stroke-linejoin="miter"/>
+                                <polygon points="205,150 155,210 200,210 195,249.5 244.5,190 200,190" fill="#06283D"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">
+                            <h1>ATA <span>BATTERY</span></h1>
+                            <span>World Industry Heart | قلب صنعت جهان</span>
+                        </div>
+                    </a>
+                    <nav class="nav-wrapper">
+                        <ul class="nav-menu">
+                            <li class="nav-item"><a href="../index.html" class="nav-link">صفحه اصلی</a></li>
+                            <li class="nav-item"><a href="product.html" class="nav-link">محصولات</a></li>
+                            <li class="nav-item">
+                                <span class="nav-link">خدمات پس از فروش <i class="fas fa-chevron-down" style="margin-right: 5px; font-size: 11px;"></i></span>
+                                <div class="dropdown">
+                                    <a href="warranty.html">شرایط گارانتی</a>
+                                    <a href="#">استعلام گارانتی</a>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="blog.html" class="nav-link">وبلاگ و اخبار</a></li>
+                            <li class="nav-item"><a href="about.html" class="nav-link active">درباره ما</a></li>
+                            <li class="nav-item"><a href="contact.html" class="nav-link">ارتباط با ما</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <div class="action-btn"><i class="fas fa-globe"></i></div>
+                        <div class="action-btn"><i class="fas fa-search"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header> -->
+    <div id="navbar-placeholder"></div>
+    <main class="page-content">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <h1 class="reveal">درباره <span>مجموعه آتا</span></h1>
+                <p class="reveal">بیش از چهار دهه تجربه درخشان در صنعت انرژی و باتری‌سازی. ما در ATA Battery با تکیه بر دانش فنی و تعهد به کیفیت، قلب تپنده صنعت کشور هستیم.</p>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-grid">
+                    <div class="intro-image reveal">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="درباره ATA Battery">
+                    </div>
+                    <div class="intro-content reveal">
+                        <h2>آشنایی با <span>خانواده آتا</span></h2>
+                        <p>شرکت ATA Battery با ۴ سال فعالیت تخصصی در صنعت باتری، از پیشگامان ارائه راهکارهای جامع انرژی در کشور است. مجموعه ما با بهره‌گیری از کارخانه مدرن تولید باتری و کارخانه تخصصی بازیافت باتری، چرخه‌ای کامل و دوستدار محیط‌زیست از زنجیره تامین تا بازیافت را مدیریت می‌کند.</p>
+                        <p>هدف ما تنها عرضه باتری نیست؛ بلکه با اتکا به دانش روز، تامین پایدار و مسئولیت‌پذیری محیط‌زیستی، "آرامش و اطمینان" را برای مشتریان خود به ارمغان می‌آوریم.</p>
+                        <div class="signature">
+                            <img src="https://via.placeholder.com/60" alt="امضا" class="signature-img">
+                            <div class="signature-text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section (Story Road) -->
+        <section class="timeline-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>مسیر <span>پیشرفت و افتخار</span></h2>
+                    <p>نگاهی به تاریخچه پرفراز و نشیب و موفقیت‌های گروه صنعتی آتا باتری</p>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Item 1 -->
+                    <div class="timeline-item left reveal">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1394</span>
+                            <h3>آغاز فعالیت شرکت قلب صنعت جهان</h3>
+                            <p>شروع فعالیت‌های تجاری و بازرگانی که پایه‌های اولیه گروه صنعتی پزشکی و بازتوانی را شکل داد.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="timeline-item right reveal">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1397</span>
+                            <h3>تاسیس شرکت بازرگانی باتری</h3>
+                            <p>ورود رسمی و تخصصی به صنعت دستگاههای ورزشی و بازتوانی و توزیع برندهای معتبر.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="timeline-item left reveal">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1400</span>
+                            <h3>بزرگترین توزیع‌کننده باتری در کشور</h3>
+                            <p>دستیابی به سهم بازار برتر و گسترش شبکه توزیع در سراسر ایران.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="timeline-item right reveal">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1401</span>
+                            <h3>راه‌اندازی کارخانجات تولیدی</h3>
+                            <p>راه اندازی برند آتا</p>
+                            <div class="timeline-logos">
+                                <span>CarPile</span><span>Tinoo</span><span>HiPile</span><span>KAMA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="timeline-item left reveal">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1402</span>
+                            <h3>تولید باتری‌های صنعتی و UPS</h3>
+                            <p>ورود به عرصه تکنولوژی‌های پیشرفته با برندهای zima</p>
+                            <div class="timeline-logos">
+                                <span>UFO</span><span>ZICO</span><span>ALARM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="timeline-item right reveal">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1404</span>
+                            <h3>راه‌اندازی کارخانه </h3>
+                            <p>تکمیل زنجیره تولید با راه‌اندازی خط تولید قطعات باتری.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item reveal">
+                        <i class="fas fa-calendar-alt stat-icon"></i>
+                        <div class="stat-number" data-target="11">11</div>
+                        <div class="stat-label">سال تجربه درخشان</div>
+                    </div>
+                    <div class="stat-item reveal">
+                        <i class="fas fa-industry stat-icon"></i>
+                        <div class="stat-number" data-target="3">3</div>
+                        <div class="stat-label">کارخانه فعال</div>
+                    </div>
+                    <div class="stat-item reveal">
+                        <i class="fas fa-users stat-icon"></i>
+                        <div class="stat-number" data-target="100">100</div>
+                        <div class="stat-label">نیروی انسانی متخصص</div>
+                    </div>
+                    <div class="stat-item reveal">
+                        <i class="fas fa-globe-asia stat-icon"></i>
+                        <div class="stat-number" data-target="30">30</div>
+                        <div class="stat-label">نمایندگی در سراسر کشور</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>چرا <span>آتا باتری ؟</span></h2>
+                    <p>ارزش‌هایی که ما را متمایز می‌کند</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card reveal">
+                        <div class="value-icon"><i class="fas fa-medal"></i></div>
+                        <h3>کیفیت جهانی</h3>
+                        <p>استفاده از مواد اولیه درجه یک و تکنولوژی روز اروپا در خطوط تولید.</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <div class="value-icon"><i class="fas fa-headset"></i></div>
+                        <h3>خدمات پس از فروش</h3>
+                        <p>15 ماه گارانتی بی‌قید و شرط و شبکه گسترده نمایندگی‌ها.</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>نوآوری و تحقیق</h3>
+                        <p>تیم تحقیق و توسعه (R&D) قدرتمند برای ارتقای مداوم محصولات.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="footer-placeholder"></div>
+    <!-- Footer -->
+    <!-- <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>ATA BATTERY</h3>
+                    <p>قلب صنعت جهان - World Industry Heart<br>تولید کننده برتر باتری‌های خودرویی، UPS و صنعتی</p>
+                </div>
+                <div class="footer-links-grid">
+                    <a href="about.html">درباره ما</a>
+                    <a href="contact.html">ارتباط با ما</a>
+                    <a href="warranty.html">شرایط گارانتی</a>
+                    <a href="product.html?cat=car">قیمت باتری خودرو</a>
+                    <a href="product.html?cat=motor">باتری موتور</a>
+                    <a href="#">پیشنهادات و انتقادات</a>
+                    <a href="#">استعلام گارانتی</a>
+                    <a href="#">نمایندگی‌ها</a>
+                </div>
+                <div class="social-section">
+                    <h4>ما را در شبکه‌های اجتماعی دنبال کنید</h4>
+                    <p>از آخرین اخبار و تخفیف‌ها مطلع شوید</p>
+                    <div class="social-icons">
+                        <a href="#" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#" title="واتساپ"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>تمامی حقوق محفوظ است | ATA Battery © 1405</p>
+            </div>
+        </div>
+    </footer> -->
+    <script src="../assets/js/include.js"></script>
+    <!-- JavaScript for Interactions -->
+    <script>
+        // 1. Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            revealElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible'); 
+                    element.classList.add('active'); 
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); 
+
+        // 2. Number Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200; 
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target + "+";
+                    }
+                };
+                const rect = counter.getBoundingClientRect();
+                if(rect.top < window.innerHeight && rect.bottom >= 0) {
+                     updateCount();
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateCounters);
+         function highlightActiveNav() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-menu > .nav-item > a.nav-link').forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop().split('?')[0];
+                if (linkPath === currentPath) link.classList.add('active');
+            });
+            document.querySelectorAll('.nav-menu > .nav-item > span.nav-link').forEach(span => {
+                span.classList.remove('active');
+                const dropdown = span.nextElementSibling;
+                if (dropdown) {
+                    dropdown.querySelectorAll('a').forEach(a => {
+                        const linkPath = a.getAttribute('href').split('/').pop().split('?')[0];
+                        if (linkPath && linkPath === currentPath) span.classList.add('active');
+                    });
+                }
+            });
+        }
+        document.addEventListener('partLoaded', function (e) {
+            if (e.detail.id === 'navbar-placeholder') highlightActiveNav();
+        });
+    </script>
+</body>
+</html>

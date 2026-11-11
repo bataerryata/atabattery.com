@@ -1,0 +1,277 @@
+/* common.css - ATA Battery */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/lalezar-font@v1.0.0/dist/lalezar-font-face.css');
+/* رنگ‌ها و متغیرهای سراسری سایت */
+:root {
+--navy-dark: #0A1F3D;
+--petroleum-dark: #06283D;
+--gold-primary: #C9A227;
+--gold-light: #D4AF37;
+--white: #FFFFFF;
+--gray-light: #F5F5F5;
+--transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Vazirmatn', sans-serif; }
+
+/* ============================================
+HEADER
+============================================ */
+.header {
+background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+position: fixed; top: 0; width: 100%; z-index: 1000;
+box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+border-bottom: 2px solid var(--gold-primary);
+height: 82px;
+}
+.container { max-width: 1600px; margin: 0 auto; padding: 0 16px; height: 100%; }
+.header-content { display: flex; justify-content: space-between; align-items: center; height: 100%; gap: 10px; }
+.logo { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: var(--transition); text-decoration: none; flex-shrink: 0; }
+.logo:hover { transform: scale(1.05); }
+.logo-icon { width: 56px; height: 56px; }
+.logo-text h1 {
+display: flex; align-items: baseline; gap: 6px;
+color: var(--gold-primary); font-family: 'Vazirmatn', sans-serif;
+font-size: 24px; font-weight: 900; margin: 0; line-height: 1;
+font-family: 'Lalezar', 'Vazirmatn', sans-serif; /* تغییر فونت در این بخش */
+letter-spacing: 1px; text-shadow: 0 2px 12px rgba(201,162,39,0.45);
+}
+.logo-text h1 span {
+/* display: inline-block; color: var(--gray-light);
+font-size: 14px; font-weight: 700; letter-spacing: 3px; margin: 0 0 2px 0; */
+display: flex; 
+  align-items: baseline; 
+  gap: 6px;
+  color: var(--white); 
+  font-family: 'Lalezar', 'Vazirmatn', sans-serif; /* تغییر فونت در این بخش */
+  font-size: 20px; 
+  font-weight: 900; 
+  margin: 0; 
+  line-height: 1;
+  letter-spacing: 1px; 
+  text-shadow: 0 2px 12px rgba(201,162,39,0.45);
+}
+.logo-tagline { color: var(--gold-light); font-size: 10px; display: block; margin-top: 2px; letter-spacing: 0.5px; }
+.nav-wrapper { flex: 1 1 auto; min-width: 0; margin: 0 14px; }
+.nav-menu { display: flex; list-style: none; gap: 1px; justify-content: center; flex-wrap: nowrap; }
+.nav-link { color: var(--white); padding: 8px 10px; display: block; font-weight: 600; font-size: 12.5px; transition: var(--transition); border-radius: 6px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+.nav-link:hover, .nav-link.active { background: var(--gold-primary); color: var(--navy-dark); }
+.nav-item { position: relative; }
+.dropdown {
+position: absolute; top: 100%; right: 0; left: auto;
+background: var(--white); min-width: 260px;
+border-radius: 8px; box-shadow: 0 10px 30px rgba(10,31,61,0.25);
+opacity: 0; visibility: hidden; transform: translateY(-10px); transition: var(--transition);
+border-top: 3px solid var(--gold-primary); margin-top: 0;
+z-index: 1001;
+}
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown a { color: var(--navy-dark); padding: 12px 20px; display: block; border-bottom: 1px solid var(--gray-light); transition: var(--transition); font-weight: 500; text-decoration: none; font-size: 14px; }
+.dropdown a:hover { background: linear-gradient(90deg, var(--gold-primary) 0%, rgba(201,162,39,0.1) 100%); padding-right: 28px; }
+.dropdown a:last-child { border-bottom: none; }
+.dropdown > a:first-child, .dropdown > .dropdown-subitem:first-child > a { border-top-right-radius: 8px; border-top-left-radius: 8px; }
+.dropdown > a:last-child, .dropdown > .dropdown-subitem:last-child > a { border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; }
+/* زیرمنوی تودرتو (مثلا برندهای باتری) */
+.dropdown-subitem { position: relative; }
+.dropdown-subitem > a { display: flex; align-items: center; justify-content: space-between; }
+.dropdown-arrow { font-size: 11px; color: var(--gold-primary); margin-right: 8px; }
+.dropdown-sub {
+position: absolute; top: 0; right: 100%;
+min-width: 200px; background: var(--white);
+border-radius: 8px; box-shadow: 0 10px 30px rgba(10,31,61,0.25);
+opacity: 0; visibility: hidden; transform: translateX(10px); transition: var(--transition);
+border-top: 3px solid var(--gold-primary); overflow: hidden; z-index: 1002;
+}
+.dropdown-subitem:hover .dropdown-sub { opacity: 1; visibility: visible; transform: translateX(0); }
+.dropdown-sub a { color: var(--navy-dark); padding: 12px 20px; display: block; border-bottom: 1px solid var(--gray-light); transition: var(--transition); font-weight: 500; text-decoration: none; font-size: 14px; }
+.dropdown-sub a:hover { background: linear-gradient(90deg, var(--gold-primary) 0%, rgba(201,162,39,0.1) 100%); padding-right: 28px; }
+.dropdown-sub a:last-child { border-bottom: none; }
+.header-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+.action-item { position: relative; }
+.action-btn {
+background: rgba(255,255,255,0.1); border: 1.5px solid var(--gold-primary); color: var(--gold-primary);
+width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+cursor: pointer; transition: var(--transition); font-size: 15px; text-decoration: none;
+}
+.action-btn:hover { background: var(--gold-primary); color: var(--navy-dark); transform: rotate(360deg); }
+.contact-panel {
+position: absolute; top: 120%; left: 50%; transform: translateX(-50%) translateY(-6px);
+background: var(--white); color: var(--navy-dark); padding: 10px 18px;
+border-radius: 8px; box-shadow: 0 10px 30px rgba(10,31,61,0.25);
+border-top: 3px solid var(--gold-primary); white-space: nowrap;
+opacity: 0; visibility: hidden; transition: var(--transition); z-index: 1001;
+}
+.contact-panel.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.contact-panel a { color: var(--navy-dark); font-weight: 700; text-decoration: none; direction: ltr; display: flex; }
+.contact-panel.show { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateX(-50%) translateY(0); 
+}
+/* .panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    display: none;
+    z-index: 1000; 
+}
+.panel-overlay.show {
+    display: block;
+} */
+.contact-panel a { 
+    color: var(--navy-dark); 
+    font-weight: 700; 
+    text-decoration: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 10px; /* فاصله بین آیکون و شماره */
+    direction: ltr; /* قرار گرفتن آیکون در سمت راست */
+    padding: 6px 0;
+}
+
+.contact-panel a span {
+    direction: ltr; /* مرتب ماندن فرمت شماره تلفن */
+}
+
+.contact-panel a i {
+    color: var(--gold-primary); /* رنگ طلایی برای آیکون‌ها */
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+}
+
+
+/* ============================================
+FOOTER
+============================================ */
+.footer {
+background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+color: var(--white); padding: 60px 0 30px; border-top: 5px solid var(--gold-primary);
+height: auto; min-height: 40vh; scroll-snap-align: start;
+}
+.footer-content { display: grid; grid-template-columns: 1.5fr 2fr 1.5fr; gap: 60px; margin-bottom: 40px; }
+.footer-logo h3 { color: var(--gold-primary); font-size: 28px; margin-bottom: 20px; }
+.footer-logo p { opacity: 0.9; line-height: 1.8; margin-bottom: 20px; }
+.footer-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.footer-links-grid a { color: var(--white); opacity: 0.9; padding: 8px 0; transition: var(--transition); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.footer-links-grid a:hover { color: var(--gold-primary); padding-right: 10px; }
+.footer-links-grid a::before { content: '\f104'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 12px; color: var(--gold-primary); }
+.social-section h4 { color: var(--gold-primary); font-size: 22px; margin-bottom: 20px; }
+.social-section p { opacity: 0.9; margin-bottom: 20px; }
+.social-icons { display: flex; gap: 15px; }
+.social-icons a {
+width: 50px; height: 50px; background: rgba(255,255,255,0.1); border: 2px solid var(--gold-primary);
+border-radius: 50%; display: flex; align-items: center; justify-content: center;
+color: var(--gold-primary); font-size: 22px; transition: var(--transition);
+}
+.social-icons a:hover { background: var(--gold-primary); color: var(--navy-dark); transform: translateY(-5px) rotate(360deg); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; opacity: 0.8; font-size: 14px; }
+
+.nav-link.active {
+    background: linear-gradient(135deg, #D4AF37, #C9A227);
+    color: #0A1F3D;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+} 
+ /* استایل باکس طلایی دور گزینه فعال
+
+@media (max-width: 768px) {
+.header { height: 64px; }
+.logo-icon { width: 38px; height: 38px; }
+.logo-text h1 { font-size: 17px; }
+.logo-text h1 span { font-size: 10px; }
+}
+/* تغییر جهت برای زبان انگلیسی */
+body.lang-en {
+    font-family: 'Arial', sans-serif;
+}
+
+body.lang-en .battery-info-attached {
+    left: auto;
+    right: -280px;
+}
+
+body.lang-en .battery-card-attached:hover {
+    transform: translateX(-5px);
+}
+
+body.lang-en .blog-link:hover {
+    gap: 10px;
+}
+
+/* تغییر فلش‌ها برای LTR */
+body.lang-en .blog-link i,
+body.lang-en .battery-cta-attached i {
+    transform: rotate(180deg);
+}
+
+/* تنظیمات اضافی برای LTR */
+body.lang-en .hero-overlay {
+    background: linear-gradient(to right, rgba(10, 31, 61, 0.95) 0%, rgba(10, 31, 61, 0.7) 50%, rgba(10, 31, 61, 0.4) 100%);
+}
+
+body.lang-en .vehicle-display.entering {
+    transform: translate(-50%, -50%) translateX(0);
+}
+
+body.lang-en .vehicle-display.exiting {
+    transform: translate(-50%, -50%) translateX(-150vw);
+}
+/* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}

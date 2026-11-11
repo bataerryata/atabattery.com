@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عضویت در سایت | آتا باتری</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/common.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Vazirmatn', sans-serif;
+background: linear-gradient(135deg, var(--navy-dark) 0%, var(--petroleum-dark) 100%);
+min-height: 100vh;
+padding-top: 82px;
+}
+/* ============================================
+صفحه‌ی عضویت / ورود
+============================================ */
+.auth-page {
+position: relative;
+min-height: calc(100vh - 82px);
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+padding: 20px 20px;
+}
+.auth-page::before {
+content: '';
+position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+background: radial-gradient(circle at 50% 20%, rgba(201,162,39,0.10) 0%, transparent 55%);
+z-index: 0;
+}
+/* کف شطرنجی سه‌بعدی تزئینی، هم‌رنگ سایت */
+.auth-floor {
+position: absolute; bottom: 0; left: 0; width: 100%; height: 240px;
+perspective: 500px; overflow: hidden; z-index: 0;
+}
+/* .auth-floor-grid {
+position: absolute; bottom: -40px; left: 50%; width: 220%; height: 100%;
+transform: translateX(-50%) rotateX(65deg);
+background-image:
+linear-gradient(rgba(201,162,39,0.25) 1px, transparent 1px),
+linear-gradient(90deg, rgba(201,162,39,0.25) 1px, transparent 1px);
+background-size: 60px 60px;
+mask-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+} */
+.auth-card {
+position: relative; z-index: 1;
+width: 100%; max-width: 420px;
+background: rgba(255,255,255,0.97);
+border: 2px solid var(--gold-primary);
+border-top: 4px solid var(--gold-primary);
+border-radius: 16px;
+box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+padding: 15px 15px;
+text-align: center;
+}
+.auth-card h1 {
+color: var(--navy-dark);
+font-size: 26px;
+font-weight: 900;
+margin-bottom: 10px;
+}
+.auth-card h1 span { color: var(--gold-primary); }
+.auth-subtitle {
+color: #666;
+font-size: 14px;
+margin-bottom: 25px;
+line-height: 1.8;
+}
+.auth-field { position: relative; margin-bottom: 18px; }
+.auth-field input {
+width: 100%;
+padding: 14px 45px 14px 16px;
+background: var(--gray-light);
+border: 1.5px solid transparent;
+border-radius: 10px;
+color: var(--navy-dark);
+font-family: 'Vazirmatn', sans-serif;
+font-size: 14px;
+outline: none;
+transition: var(--transition);
+text-align: right;
+}
+.auth-field input::placeholder { color: #999; }
+.auth-field input:focus {
+border-color: var(--gold-primary);
+background: var(--white);
+box-shadow: 0 0 0 4px rgba(201,162,39,0.12);
+}
+.auth-field i {
+position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+color: var(--gold-primary); font-size: 15px; pointer-events: none;
+}
+.auth-submit {
+width: 100%;
+background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+color: var(--navy-dark);
+border: none;
+padding: 15px;
+border-radius: 50px;
+font-family: 'Vazirmatn', sans-serif;
+font-weight: 800;
+font-size: 16px;
+cursor: pointer;
+transition: var(--transition);
+box-shadow: 0 10px 25px rgba(201,162,39,0.35);
+margin-top: 8px;
+}
+.auth-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(201,162,39,0.5); }
+.auth-terms {
+color: #777;
+font-size: 12.5px;
+margin-top: 20px;
+line-height: 1.8;
+}
+.auth-divider {
+display: flex; align-items: center; gap: 12px;
+margin: 26px 0 16px;
+color: #999; font-size: 13px;
+}
+.auth-divider::before, .auth-divider::after {
+content: ''; flex: 1; height: 1px; background: #e2e2e2;
+}
+.auth-login-link {
+color: var(--navy-dark);
+font-weight: 700;
+font-size: 14px;
+}
+.auth-login-link a { color: var(--gold-primary); text-decoration: none; }
+.auth-login-link a:hover { text-decoration: underline; }
+.auth-back {
+display: inline-flex; align-items: center; gap: 6px;
+margin-top: 18px;
+color: #999; font-size: 13px; text-decoration: none;
+transition: var(--transition);
+}
+.auth-back:hover { color: var(--gold-primary); }
+@media (max-width: 768px) {
+.auth-card { padding: 30px 30px; }
+body { padding-top: 64px; }
+.auth-page { min-height: calc(100vh - 64px); }
+}
+/* ============================================
+   قوانین عمومی ری‌اسپانسیو موبایل
+   (این بلوک رو آخر <style> هر صفحه بچسبونید)
+   ============================================ */
+
+html, body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* هر گریدی که اسمش شامل "-grid" باشه، خودکار تک‌ستونه می‌شه */
+@media (max-width: 768px) {
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* هر بخشی که اسمش شامل "-selector" یا "-container" باشه، عمودی و جمع‌وجورتر می‌شه */
+    [class*="-selector"] {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        border-radius: 20px !important;
+    }
+
+    [class*="-container"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    h1 { font-size: clamp(24px, 6vw, 32px) !important; }
+    h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+
+    /* هر بخشی که به‌صورت گرید ۲ ستونه یا بیشتر تعریف شده (مثل featured-post) */
+    [class*="-post"], [class*="-hero"], [class*="-content"] {
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .filter-container, [class*="-form"] {
+        flex-direction: column !important;
+    }
+}
+</style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<section class="auth-page">
+<div class="auth-floor">
+<div class="auth-floor-grid"></div>
+</div>
+
+<div class="auth-card">
+<h1>عضویت در سایت <span>ATA</span></h1>
+<p class="auth-subtitle">اگر قبلا ثبت‌نام نکرده‌اید، اینجا ثبت‌نام کنید</p>
+
+<form onsubmit="event.preventDefault(); alert('فرم عضویت هنوز به سرور وصل نشده است.');">
+<div class="auth-field">
+<input type="text" name="firstname" placeholder="نام" required>
+<i class="fas fa-user"></i>
+</div>
+<div class="auth-field">
+<input type="text" name="lastname" placeholder="نام خانوادگی" required>
+<i class="fas fa-user"></i>
+</div>
+<div class="auth-field">
+<input type="text" name="contact" placeholder="ایمیل یا شماره همراه" required>
+<i class="fas fa-envelope"></i>
+</div>
+<div class="auth-field">
+<input type="password" name="password" placeholder="رمز عبور" required>
+<i class="fas fa-lock"></i>
+</div>
+<button type="submit" class="auth-submit">عضویت</button>
+</form>
+
+<p class="auth-terms">با ثبت‌نام شما شرایط و مقررات حریم خصوصی آن را می‌پذیرید</p>
+
+<div class="auth-divider">یا</div>
+<p class="auth-login-link">قبلا ثبت‌نام کرده‌اید؟ <a href="/pages/rep-login.html">ورود</a></p>
+
+<a href="/index.html" class="auth-back"><i class="fas fa-chevron-left"></i> بازگشت به صفحه اصلی</a>
+</div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/include.js"></script>
+</body>
+</html>
